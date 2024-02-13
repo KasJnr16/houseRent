@@ -1,0 +1,31 @@
+{% extends "core/base.html" %} {% block title %}Welcome {% endblock%} {% block content %}
+<section
+  class="mt-5 px-3 py-12 shadow-2xl rounded-2xl justify-center text-center"
+>
+  <p class="text-6xl text-bold">
+    <span class="text-sky-400">Ho's First Rent App</span><br />
+    for Students
+  </p>
+  <p class="mt-10 underline decoration-2">
+    [AppName] is a web application developed to help students find easy
+    accomodation.
+  </p>
+  <div class="mt-8 text-lg font-semibold">
+    <a href="{% url 'core:signUp' %}" class="px-3 py-3 border border-black bg-sky-400 shadow-xl rounded-xl"
+      >GET STARTED</a
+    >
+    <a
+      href="{% url 'core:home' %}"
+      class="ml-2 px-3 py-3 border border-sky-400 shadow-xl rounded-xl"
+      >BROWSE</a
+    >
+  </div>
+</section>
+<section class="mt-5 px-6 py-12 shadow-2xl rounded-2xl">
+  <h1 class="text-2xl text-center font-semibold">Services</h1>
+  <div class="grid grid-cols-2">
+    
+  </div>
+</section>
+
+{% endblock %}

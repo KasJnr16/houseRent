@@ -1,0 +1,104 @@
+{% extends "core/base.html" %} {% block title %}Upload {% endblock%} 
+{% block content %}
+<section>
+  <div>
+    <div class="flex justify-center space-x-3 h-full w-full">
+      <div class="size-96">
+        {% if house.image %}
+        <img
+          src="{{ house.image.url }}"
+          class="object-cover h-full w-full rounded-l-2xl shadow shadow-gray-400"
+        />
+        {% else %}
+        <span>No Image</span>
+        {% endif %}
+      </div>
+      <!--  -->
+      <div class="space-y-2">
+        <div class="grid grid-cols-2 gap-1">
+          <div class="h-full w-48">
+            {% if house.image %}
+            <img
+              src="{{ house.image1.url }}"
+              class="object-cover h-full w-full shadow shadow-gray-400"
+            />
+            {% else %}
+            <span>No Image</span>
+            {% endif %}
+          </div>
+          <div class="h-full w-48">
+            {% if house.image %}
+            <img
+              src="{{ house.image2.url }}"
+              class="object-cover h-full w-full rounded-tr-2xl shadow shadow-gray-400"
+            />
+            {% else %}
+            <span>No Image</span>
+            {% endif %}
+          </div>
+        </div>
+        <div class="py-3 px-3 shadow shadow-gray-400 rounded-br-2xl w-96">
+          <h2 class="text-xl font-semibold text-center">
+            {{ house.house_name }}
+          </h2>
+          <ul class=>
+            <li class="font-semibold">Host by {{ house.created_by }}</li>
+            <li class="font-semibold">{{ house.category }}</li>
+            {% if house.description %}
+            <li class="text-gray-500">{{house.description}}</li>
+            {% else %}
+            <li class="text-gray-500">
+              <span class="font-semibold">{{house.created_by}}</span> did not
+              write a description
+            </li>
+            {% endif %}
+            <li class=" text-teal-500 mt-3 font-semibold flex justify-between">GHC{{ house.price }}
+                <div>
+                    {% if house.created_by %}
+                      <a href="{% url 'houseInfo:editHome' house.pk %}" class="text-gray-900 px-3 py-3  bg-sky-400 shadow-xl rounded-xl">Edit</a>
+                      <a href="{% url 'houseInfo:deleteHome' house.pk %}" class="text-gray-900 px-3 py-3  bg-red-400 shadow-xl rounded-xl">Delete</a>
+                      {% else %}
+                      <a href="#" class="text-gray-900 px-5 bg-teal-100">Rent</a>
+                    {% endif%}
+                </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!--  -->
+    </div>
+  </div>
+</section>
+<section>
+    <div>
+        <div class="mt-6 px-6 py-12 bg-gray-100 rounded-xl">
+            <h2 class="mb-12 text-2xl font-semibold text-center teext-center">Related Items</h2>
+
+            <div class="grid grid-cols-3 gap-3">
+                {% for house in related_houses %}
+                <div>
+                    <a href="{% url 'houseInfo:homeDetail' house.id %}">
+                        {% if house.image %}
+                        <img src="{{ house.image.url }}" class="rounded-xl shadow-2xl w-full border-4 border-black-400"
+                            style="object-fit: cover; height: 300px; min-height: 200px;">
+                        {% else %}
+                        <span>No Image</span>
+                        {% endif %}
+                        <div class="px-3 py-6">
+                            <h2 class="text-xl font-semibold">{{ house.house_name }}</h2>
+                            {% if house.description %}
+                            <p class="text-gray-500">{{house.description}}</p>
+                            {% else %}
+                            <p class="text-gray-500">{{request.user.username}} did not write a description</p>
+                            {% endif %}
+                            <p class="font-semibold">GHC{{ house.price }}</p>
+                        </div>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

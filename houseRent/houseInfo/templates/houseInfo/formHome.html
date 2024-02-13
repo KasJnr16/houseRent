@@ -1,0 +1,22 @@
+{% extends "core/base.html" %} {% block title %} {{title}} {% endblock%} {% block content %}
+<section>
+    <div class="justify-center">
+        <div>
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="space-y-2">
+                    {{ form.as_p }}
+                </div>
+
+                {% if form.errors or form.non_field_errors %}
+                <div class="mb-3 p-6 bg-red-100 rounded-xl">
+                    {% for field in form %} {{field.errors }} {{ form.non_field_errors }}
+                    {% endfor%}
+                </div>
+                {% endif %}
+                <button class=" mt-8 text-lg font-semibold px-5 py-5 bg-sky-400 rounded-xl">Submit</button>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}
